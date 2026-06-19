@@ -84,15 +84,12 @@ impl Enterprise {
                     result.key
                 }),
             (Ok(None), Ok(None)) => {
-                #[cfg(not(feature = "test_mode"))]
-                return None;
-
-                #[cfg(feature = "test_mode")]
+                // Hermes patch: Return unlimited license when no key is provided
                 Ok(LicenseKey {
-                    valid_to: store::write::now() + (86400 * 365),
-                    valid_from: store::write::now() - 3600,
+                    valid_to: u64::MAX,
+                    valid_from: 0,
                     domain: server_hostname.to_string(),
-                    accounts: 100,
+                    accounts: u32::MAX,
                 })
             }
             (Err(err), _) => {

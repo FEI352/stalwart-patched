@@ -92,9 +92,8 @@ pub enum AlertContentToken {
 
 impl Core {
     pub fn is_enterprise_edition(&self) -> bool {
-        self.enterprise
-            .as_ref()
-            .is_some_and(|e| !e.license.is_expired())
+        // Hermes patch: Always enabled
+        true
     }
 }
 
@@ -114,10 +113,8 @@ impl Server {
     }
 
     pub fn licensed_accounts(&self) -> u32 {
-        self.core
-            .enterprise
-            .as_ref()
-            .map_or(0, |e| e.license.accounts)
+        // Hermes patch: Unlimited
+        u32::MAX
     }
 
     pub fn log_license_details(&self) {
