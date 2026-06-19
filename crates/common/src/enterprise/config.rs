@@ -84,9 +84,9 @@ impl Enterprise {
                     result.key
                 }),
             (Ok(None), Ok(None)) => {
-                // Hermes patch: Return unlimited license when no key is provided
+                // Self-hosted: return unlimited license
                 Ok(LicenseKey {
-                    valid_to: u64::MAX,
+                    valid_to: store::write::now() + (86400 * 365 * 10),
                     valid_from: 0,
                     domain: server_hostname.to_string(),
                     accounts: u32::MAX,

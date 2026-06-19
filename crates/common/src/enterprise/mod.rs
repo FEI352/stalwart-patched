@@ -92,7 +92,7 @@ pub enum AlertContentToken {
 
 impl Core {
     pub fn is_enterprise_edition(&self) -> bool {
-        // Hermes patch: Always enabled
+        // Self-hosted: always enabled
         true
     }
 }
@@ -113,7 +113,7 @@ impl Server {
     }
 
     pub fn licensed_accounts(&self) -> u32 {
-        // Hermes patch: Unlimited
+        // Self-hosted: unlimited
         u32::MAX
     }
 
