@@ -1,10 +1,14 @@
-name: Build and Push to GHCR
+name: Build GHCR
 
 on:
   push:
     tags:
       - 'v*.*.*-patched'
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   CARGO_TERM_COLOR: always
@@ -45,3 +49,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          timeout-minutes: 30
