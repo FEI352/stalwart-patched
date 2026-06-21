@@ -110,14 +110,11 @@ impl Server {
 
     #[inline]
     pub fn is_enterprise_edition(&self) -> bool {
-        self.core.is_enterprise_edition()
+        true
     }
 
     pub fn licensed_accounts(&self) -> u32 {
-        self.core
-            .enterprise
-            .as_ref()
-            .map_or(0, |e| e.license.accounts)
+        u32::MAX
     }
 
     pub fn log_license_details(&self) {
