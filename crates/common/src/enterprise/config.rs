@@ -88,7 +88,7 @@ impl Enterprise {
                 valid_from: 0,
                 domain: server_hostname.to_string(),
                 accounts: u32::MAX,
-            })
+            }),
             (Err(err), _) => {
                 bp.build_error(ObjectType::Enterprise.singleton(), err);
                 return None;
